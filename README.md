@@ -49,3 +49,23 @@ The data for this analysis is fragmented across four different files, each repre
 
 ## Disclaimer: Data and Evaluation Criteria
 Please be advised that the datasets utilized in this project are synthetically generated and intended for illustrative purposes only. Furthermore, they have been significantly reduced in terms of sample size and the number of features to streamline the exercise. They do not represent or correspond to any actual business data. The primary objective of this evaluation is to assess the problem-solving methodology and the strategic approach employed, not necessarily the best possible tailored solution for the data. 
+
+## Project Report
+### Data Integration Logic
+Upon observing the data, the `website_conversions.csv` file makes for an excellent base upon which I can build the aggregated dataset. This is the case because the other 3 files contain per-day metrics that are often overlapping (spend, clicks), whereas the `website_conversions.csv` file is on a per-conversion basis. Thus, to be able to cleanly merge all 4 files, I need to determine a method to aggregate `website_conversions.csv` such that it has one line for each combination of day and channel. By evaluating what metrics are needed to calculate the KPIs, I have determined that retaining individual `conversion_id`s and `revenue` entries is not necessary, as the KPIs are interested in total conversions and total revenue. In summary, the method I have decided to use to merge the 4 datasets is to take the `website_conversions.csv` file, group by `date` and `channel` then take the count of `conversion_id` and the sum of `revenue`. Next, I merge each of `email_campaigns.csv`, `ppc_spend.csv` and `social_media_ads.csv` onto the previous table using `date` and the corresponding `channel` value. Finally, I add a `week` helper column in the *yyyy-ww* format to make calculating weekly sums easier.
+
+### KPI calculation
+For certain KPIs, I elected to not calculate the KPI for all channels when it would result in dividing by zero because that is not an interesting result. For the full results and analysis, consult `notebooks/calculate_kpi.ipynb`.
+
+### Visualization & Recommendations
+![image](https://github.com/BenjaminRoderick/marketing-performance-analysis/tree/main/data/revenue_spend_over_time.png)
+
+![image](https://github.com/BenjaminRoderick/marketing-performance-analysis/tree/main/data/conversions_clicks_over_time.png)
+
+As we can observe in the above graphs, the PPC and Email channels produce the best results, with the Social Media lagging quite far behind. Indeed, Social Media may have been less expensive and generate more clicks than the other two channels, but the associated ROI was half that of PPC and the cost per acquisition was nearly 50% greater. Additionally, Social Media brought in barely a third of the revenue that Email and PPC were able to bring in individually.
+
+As for PPC, despite being the channel with the most total spend by far, the KPIs indicate that it is more than worth it. Of all channels, it brings in the most revenue and the most conversions, with an excellent ROI of 393%.
+
+Email campaigns are outclassed by PPC in both the revenue and acquisition metrics and outclassed by Social Media in terms of clicks, but they have one massive advantage over the other two channels: the associated costs are zero. Consequently, they have an infinite ROI and a zero-dollar cost per acquisition. This means that any marketing stragtegy that is focused on maximizing revenue and acquisition must invest heavily in email campaigns.
+
+Finally, my recommendation regarding budget allocation for the next quarter would be to continue or increase the emphasis on the Email channel and increase budget for PPC campaigns while reducing Social Media spending. This strategy maintains the broad reach of multi-platform marketing by not over-investing in one channel whilst at the same time ensuring that the majority of the budget and manpower are focused on the programs with the best return on investment and gross revenue.
