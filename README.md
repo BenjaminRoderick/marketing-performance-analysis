@@ -58,9 +58,9 @@ Upon observing the data, the `website_conversions.csv` file makes for an excelle
 For certain KPIs, I elected to not calculate the KPI for all channels when it would result in dividing by zero because that is not an interesting result. For the full results and analysis, consult `notebooks/calculate_kpi.ipynb`.
 
 ### Visualization & Recommendations
-![image](https://github.com/BenjaminRoderick/marketing-performance-analysis/tree/main/data/revenue_spend_over_time.png)
+![image](https://github.com/BenjaminRoderick/marketing-performance-analysis/blob/main/data/revenue_spend_over_time.png)
 
-![image](https://github.com/BenjaminRoderick/marketing-performance-analysis/tree/main/data/conversions_clicks_over_time.png)
+![image](https://github.com/BenjaminRoderick/marketing-performance-analysis/blob/main/data/conversions_clicks_over_time.png)
 
 As we can observe in the above graphs, the PPC and Email channels produce the best results, with the Social Media lagging quite far behind. Indeed, Social Media may have been less expensive and generate more clicks than the other two channels, but the associated ROI was half that of PPC and the cost per acquisition was nearly 50% greater. Additionally, Social Media brought in barely a third of the revenue that Email and PPC were able to bring in individually.
 
